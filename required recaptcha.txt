@@ -1,0 +1,46 @@
+<script>
+		$(".comment-form input[type='submit']").click(function (event) {
+
+// Validation for each field
+validateField("#author");
+validateField("#email");
+validateField("#comment");
+
+// Check if any fields are still invalid before submitting
+if ($(".testimonialreq").length === 0) {
+	// All fields are valid, proceed with actual form submission
+	$(".comment-form").submit();
+}
+});
+
+// Input event handler to remove the error class dynamically
+$(".comment-form input, .comment-form textarea").on("input", function () {
+validateField(this); // 'this' refers to the input/textarea being edited
+});
+
+// Function to validate a field and add/remove the error class
+function validateField(selector) {
+if ($(selector).val() === "") {
+	$(selector).addClass("testimonialreq");
+} else {
+	$(selector).removeClass("testimonialreq");
+}
+}
+</script>
+  <script>new WOW().init();</script>
+<?php if(is_single()){ ?>
+    <?php echo do_shortcode("[blog_schema id='" . get_the_ID() . "']"); ?>
+ <?php }?>
+
+<?php if(is_home() || is_author() || is_category() || is_tag() || is_archive() || !is_page('10') ){ ?>
+	<script>
+		jQuery(document).ready(function($) {
+			$('.blog_cont > div').each(function() {
+				if ($(this).hasClass('category-news-and-events')) {
+					$(this).parent('.blog_cont').hide();
+				} else {
+					$(this).parent('.blog_cont').show();
+				}
+			});
+		});
+	</script>
